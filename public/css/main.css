@@ -3,11 +3,11 @@
 @-ms-viewport { width: device-width; }
 @viewport { width: device-width; }
 /* --------------------------------------------------------
-Style Sheet for TVZskladiste
+Style Sheet for Nautica
 
-author: Matija Buriša | Denis Fodor
-email: mburisa@tvz.hr | dfodor@tvz.hr
-website: TVZskladiste.tvz.hr
+author: Matija Buriša
+email: matijaburisa@gmail.com
+website: Nautica
 ----------------------------------------------------------*/
 @import 'animate.css';
 @import 'bootstrap-select.min.css';
@@ -63,12 +63,55 @@ body {
 body {
     width: 100%;
     height: 100%;
-    background: rgba(37, 37, 37, 1) url('assets/images/bg_grid_main.png') repeat;
+    background: rgba(255, 255, 255, 1);
     font-family:  'Open Sans', sans-serif;
     font-size: 15px;
     line-height: 1.50;
     min-width: 20em;
     color: #232323;
+}
+
+.full {
+    background: url('assets/images/nautica_bg_main.png') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    color: #5bb9ea;
+}
+
+.full .top-dir,
+.full .left-dir,
+.full .right-dir,
+.full .bottom-dir {
+    padding: 1em;
+    font-size: 3em;
+    vertical-align: middle;
+    text-align: center;
+    border: 2px solid red;
+}
+.full .top-dir{
+    width: 100%;
+    height: 15%;
+    clear: both;
+}
+.full .left-dir{
+    width: 25%;
+    height: 70%;
+    float: left;
+}
+.full .right-dir{
+    width: 25%;
+    height: 70%;
+    float: right;
+}
+
+.full .bottom-dir{
+    width: 100%;
+    height: 15%;
+    clear: both;
 }
 
 a.content-holder{ text-decoration: none; }

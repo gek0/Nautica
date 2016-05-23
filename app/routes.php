@@ -11,11 +11,6 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
-
 /**
  * logout from admin area
  */
@@ -29,3 +24,4 @@ Route::get('logout', function(){
  */
 Route::post('login', ['as' => 'loginPost', 'uses' => 'LoginController@checkLogin']);
 Route::get('login', ['as' => 'login', 'uses' => 'LoginController@showLogin']);
+Route::get('/', ['as' => 'home', 'uses' => 'PublicController@showHome']);
