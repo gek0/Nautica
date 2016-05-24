@@ -22,6 +22,10 @@ Route::get('logout', function(){
 /**
  * public area
  */
-Route::post('login', ['as' => 'loginPost', 'uses' => 'LoginController@checkLogin']);
-Route::get('login', ['as' => 'login', 'uses' => 'LoginController@showLogin']);
+Route::post('prijava', ['as' => 'loginPost', 'uses' => 'LoginController@checkLogin']);
+Route::get('prijava', ['as' => 'login', 'uses' => 'LoginController@showLogin']);
+Route::get('galerija', ['as' => 'gallery', 'uses' => 'PublicController@showGallery']);
+Route::get('o-nama', ['as' => 'about-us', 'uses' => 'PublicController@showAboutUs']);
+Route::get('kontakt', ['as' => 'contact', 'uses' => 'PublicController@showContact']);
+Route::get('info', ['as' => 'info', 'uses' => 'PublicController@showInfo']);
 Route::get('/', ['as' => 'home', 'uses' => 'PublicController@showHome']);

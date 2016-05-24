@@ -4,11 +4,45 @@
 
 
 jQuery(document).ready(function(){
-
+    // page loader public pages
+    $("#fakeloader").fakeLoader({
+        timeToHide: 500,
+        zIndex: 999,
+        spinner: "spinner5", // spinner1-7
+        bgColor: "#5bb9ea"
+    });
 });
 
 $(document).ready(function(){
+    /*
+    *   navigation
+     */
+    var trigger = $('.hamburger'),
+        overlay = $('.overlay'),
+        isClosed = false;
 
+    trigger.click(function () {
+        hamburger_cross();
+    });
+
+    function hamburger_cross() {
+
+        if (isClosed == true) {
+            overlay.hide();
+            trigger.removeClass('is-open');
+            trigger.addClass('is-closed');
+            isClosed = false;
+        } else {
+            overlay.show();
+            trigger.removeClass('is-closed');
+            trigger.addClass('is-open');
+            isClosed = true;
+        }
+    }
+
+    $('[data-toggle="offcanvas"]').click(function () {
+        $('#wrapper').toggleClass('toggled');
+    });
 });
 
 /**

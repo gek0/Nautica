@@ -36,3 +36,52 @@
     {{ HTML::style('css/main.css') }}
 </head>
 <body>
+<div id="fakeloader"></div>
+
+<!-- notifications -->
+<div class="notificationOutput" id="outputMsg">
+    <div class="notificationTools" id="notifTool">
+        <span class="fa fa-times fa-med" id="notificationRemove"></span>
+        <span id="notificationTimer"></span>
+    </div>
+</div>
+
+<div id="wrapper">
+    <div class="overlay"></div>
+
+    <!-- Sidebar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+        <ul class="nav sidebar-nav">
+            <li class="sidebar-brand">
+                <a href="{{ url('/') }}">
+                    <i class="fa fa-home pr-10" aria-hidden="true"></i> Nautica
+                </a>
+            </li>
+            <li>
+                <a href="{{ url('info') }}"><i class="fa fa-ship pr-10" aria-hidden="true"></i> Rute-Informacije</a>
+            </li>
+            <li>
+                <a href="{{ url('kontakt') }}"><i class="fa fa-envelope-o pr-10" aria-hidden="true"></i> Kontakt</a>
+            </li>
+            <li>
+                <a href="{{ url('galerija') }}"><i class="fa fa-picture-o pr-10" aria-hidden="true"></i> Galerija</a>
+            </li>
+            <li>
+                <a href="{{ url('o-nama') }}"><i class="fa fa-info pr-20" aria-hidden="true"></i> O nama</a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-facebook pr-20" aria-hidden="true"></i> Facebook</a>
+            </li>
+        </ul>
+    </nav>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper" class="container-fluid">
+        <button type="button" class="hamburger is-closed" data-toggle="offcanvas" title="Navigacija">
+            <span class="hamb-top"></span>
+            <span class="hamb-middle"></span>
+            <span class="hamb-bottom"></span>
+        </button>
+
+        <div class="container content-holder">
