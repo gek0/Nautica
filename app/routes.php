@@ -26,7 +26,9 @@ Route::group(['before' => 'auth'], function() {
 		Route::get('o-nama', ['as' => 'admin-about-us', 'uses' => 'AdminController@showAboutUs']);
 		Route::get('o-nama-brisanje-slike', ['as' => 'admin-about-us-image-delete', 'uses' => 'AdminController@deleteAboutUsImage']);
 
-
+		Route::post('galerija', ['as' => 'admin-image-galleryPOST', 'uses' => 'AdminController@updateImageGallery']);
+		Route::get('galerija', ['as' => 'admin-image-gallery', 'uses' => 'AdminController@showImageGallery']);
+		Route::get('galerija-brisanje-slike/{id}', ['as' => 'admin-image-gallery-image-delete', 'uses' => 'AdminController@deleteImageGalleryImage']);
 	});
 });
 

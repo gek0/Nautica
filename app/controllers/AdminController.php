@@ -123,6 +123,116 @@ class AdminController extends BaseController {
         catch(Exception $e){
             return Redirect::to('admin/o-nama')->withErrors('Slika nije mogla biti obrisana');
         }
+    }
+
+    /**
+     * show admin gallery
+     * @return mixed
+     */
+    public function showImageGallery()
+    {
+        $image_gallery_data = Gallery::orderBy('id', 'DESC')->get();
+
+        return View::make('admin.image-gallery')->with(['page_title' => 'Administracija',
+                                                        'image_gallery_data' => $image_gallery_data
+        ]);
+    }
+
+    /**
+     * add images to image gallery
+     * @return mixed
+     */
+    public function updateImageGallery()
+    {
+        $gallery_images = Input::file('image_gallery_images');
+        $token = Input::get('_token');
+
+        //check if csrf token is valid
+        if(Session::token() != $token){
+            return Redirect::back()->withErrors('Nevažeći CSRF token!');
+        }
+
+        //validate
+        $error_list = null;
+        if($gallery_images == true){
+            foreach($gallery_images as $img){
+                $validator_images = Validator::make(['images' => $img], Gallery::$rules, Gallery::$messages);
+                if($validator_images->fails()){
+                    $error_list = $validator_images->messages()->merge();
+                }
+            }
+        }
+
+        //check for errors
+        if($error_list == null){
+            //add new images
+            if($gallery_images == true && $gallery_images[0] != null){
+                //check for image directory
+                $path = public_path().'/image_gallery_uploads/';
+                if(!File::exists($path)){
+                    File::makeDirectory($path, 0777);
+                }
+
+                foreach($gallery_images as $img){
+                    $file_name = 'Nautica_galerija_slika_'.Str::random(5);
+                    $file_extension = $img->getClientOriginalExtension();
+                    $full_name = $file_name.'.'.$file_extension;
+                    $file_size = $img->getSize();
+
+                    $file_uploaded = $img->move($path, $full_name);
+
+                    if($file_uploaded){
+                        $image = new Gallery;
+                        $image->file_name = $full_name;
+                        $image->file_size = $file_size;
+                        $image->save();
+                    }
+                }
+
+
+                //redirect on finish
+                return Redirect::to('admin/galerija')->with(['success' => 'Slike uspješno dodane']);
+            }
+            else{
+                return Redirect::to('admin/galerija')->withErrors('Nijedna slika nije odabrana');
+            }
+        }
+        else{
+            return Redirect::to('admin/galerija')->withErrors($error_list);
+        }
+    }
+
+    /**
+     * delete image from image gallery
+     * @param null $id
+     * @return mixed
+     */
+    public function deleteImageGalleryImage($id = null)
+    {
+        if($id == null){
+            return Redirect::to('admin/galerija')->withErrors('Odabrana slika ne postoji');
+        }
+        else{
+            // find image in database
+            $image = Gallery::findOrFail($id);
+
+            if($image){
+                try{
+                    File::delete(public_path().'/image_gallery_uploads/'.$image->file_name);
+                    $image->delete();
+                }
+                catch(Exception $e){
+                    return Redirect::to('admin/galerija')->withErrors('Slika nije mogla biti obrisana');
+                }
+
+                //redirect on finish
+                return Redirect::to('admin/galerija')->with(['success' => 'Slika je uspješno obrisana']);
+            }
+            else{
+                return Redirect::to('admin/galerija')->withErrors('odabrana slika ne postoji');
+            }
+        }
 
     }
+
 }

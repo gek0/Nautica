@@ -2,7 +2,6 @@
  * main JS file
  */
 
-
 jQuery(document).ready(function(){
     // page loader public pages
     $("#fakeloader").fakeLoader({
@@ -11,6 +10,7 @@ jQuery(document).ready(function(){
         spinner: "spinner5", // spinner1-7
         bgColor: "#5bb9ea"
     });
+
 });
 
 $(document).ready(function(){
@@ -43,6 +43,11 @@ $(document).ready(function(){
     $('[data-toggle="offcanvas"]').click(function () {
         $('#wrapper').toggleClass('toggled');
     });
+
+    /*
+    *   masonry gallery
+     */
+    new CBPGridGallery(document.getElementById('grid-gallery') );
 });
 
 /**

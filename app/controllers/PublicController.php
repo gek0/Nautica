@@ -25,7 +25,11 @@ class PublicController extends BaseController {
 	 */
 	public function showGallery()
 	{
-		return View::make('public.image-gallery')->with(['page_title' => 'Galerija']);
+		$image_gallery_data = Gallery::orderBy('id', 'DESC')->get();
+
+		return View::make('public.image-gallery')->with(['page_title' => 'Galerija',
+														'image_gallery_data' => $image_gallery_data
+		]);
 	}
 
 	/**

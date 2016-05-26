@@ -24,7 +24,7 @@
     <!-- scripts -->
     {{ HTML::script('js/jquery.min.js', ['charset' => 'utf-8']) }}
     {{ HTML::script('js/bootstrap.min.js', ['charset' => 'utf-8']) }}
-    {{ HTML::script('js/modernizr.js', ['charset' => 'utf-8']) }}
+    {{ HTML::script('js/modernizr.custom.js', ['charset' => 'utf-8']) }}
     {{ HTML::script('js/classie.min.js', ['charset' => 'utf-8']) }}    
     <!--[if lt IE 9]>
     {{ HTML::script('js/html5shiv.min.js', ['charset' => 'utf-8']) }}
