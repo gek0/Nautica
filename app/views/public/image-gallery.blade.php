@@ -1,6 +1,5 @@
 @include('public.layout.header')
 
-
     <section class="logo-placeholder">
         <h1>{{ $page_title }}</h1>
     </section>

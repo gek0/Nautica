@@ -12,6 +12,25 @@
 */
 
 /**
+ * admin area
+ */
+Route::group(['before' => 'auth'], function() {
+	Route::get('admin', function(){
+		return Redirect::to('admin/pocetna');
+	});
+
+	Route::group(['prefix' => 'admin'], function() {
+		Route::get('pocetna', ['as' => 'admin', 'uses' => 'AdminController@showHome']);
+
+		Route::post('o-nama', ['as' => 'admin-about-usPOST', 'uses' => 'AdminController@updateAboutUs']);
+		Route::get('o-nama', ['as' => 'admin-about-us', 'uses' => 'AdminController@showAboutUs']);
+		Route::get('o-nama-brisanje-slike', ['as' => 'admin-about-us-image-delete', 'uses' => 'AdminController@deleteAboutUsImage']);
+
+
+	});
+});
+
+/**
  * logout from admin area
  */
 Route::get('logout', function(){

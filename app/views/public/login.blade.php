@@ -2,13 +2,12 @@
 
 
     <section class="logo-placeholder">
-        {{-- HTML::image('css/assets/images/content_logo_placeholder.png', 'Logo', ['title' => 'Nautica', 'class' => 'img-responsive']) --}}
         <h1>{{ $page_title }}</h1>
     </section>
 
     <div class="login-container">
         <div class="row form">
-            {{ Form::open(['route' => 'loginPost', 'role' => 'form', 'id' => 'adminLogin', 'class' => 'form']) }}
+            {{ Form::open(['route' => 'loginPost', 'role' => 'form', 'id' => 'adminLogin', 'class' => 'form-element']) }}
                 <div class="form-group">
                     {{ Form::text('username', null, ['placeholder' => 'Korisničko ime', 'id' => 'username', 'required']) }}
                 </div>
@@ -22,7 +21,7 @@
                     </div>
                 </div>
 
-                <button type="submit" id="loginSubmit">Prijava <i class="fa fa-sign-in"></i></button>
+                <button type="submit" class="submit-form" id="loginSubmit">Prijava <i class="fa fa-sign-in"></i></button>
             {{ Form::close() }}
         </div>
     </div>

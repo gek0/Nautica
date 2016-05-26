@@ -12,6 +12,7 @@ website: Nautica
 @import 'animate.css';
 @import 'bootstrap-select.min.css';
 @import 'fakeLoader.css';
+@import 'fileinput.min.css';
 @import '../fonts/font-awesome/css/font-awesome.min.css';
 @import url(//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700,300&subset=latin,latin-ext);
 
@@ -129,14 +130,14 @@ h1 { font-size: 2em; line-height: 1.25; }
 h2 { font-size: 1.625em; line-height: 1.15384615; }
 h3 { font-size: 1.375em; line-height: 1.13636364; }
 h4 { font-size: 1.125em; line-height: 1.11111111; }
-blockquote { font-size: 1.25em; line-height: 1.25; }
+blockquote { font-size: .75em; line-height: 1.25; }
 
 @media (min-width: 43.75em) {
     h1 { font-size: 2.5em; line-height: 1.125; }
     h2 { font-size: 2em; line-height: 1.25; }
     h3 { font-size: 1.5em; line-height: 1.25; }
     h4 { line-height: 1.22222222; }
-    blockquote { font-size: 1.5em; line-height: 1.45833333; }
+    blockquote { font-size: 1em; line-height: 1.45833333; }
 }
 
 @media (min-width: 56.25em) {
@@ -144,6 +145,12 @@ blockquote { font-size: 1.25em; line-height: 1.25; }
     h2 { font-size: 2.25em; line-height: 1.25; }
     h3 { font-size: 1.75em; line-height: 1.25; }
 }
+
+span.size1{ font-size: 10px; }
+span.size2{ font-size: 12px; }
+span.size3{ font-size: 14px; }
+span.size4{ font-size: 16px; }
+span.size5{ font-size: 18px; }
 
 a{
     color: #7b7b7b;
@@ -191,9 +198,10 @@ img.thumbnail {
 }
 
 hr{
-    background: rgba(51, 122, 183, .15);
-    border-top: 1px solid rgba(51, 122, 183, .15);
-    border-bottom: 1px solid rgba(51, 122, 183, .15);
+    border: 0;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 
@@ -238,6 +246,11 @@ hr{
     text-transform: uppercase;
 }
 
+#content-main{
+    margin: 4em auto;
+    width: 75%;
+}
+
 /**
 *   login
 */
@@ -255,13 +268,14 @@ hr{
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
-.form {
+.form-element {
     background: #FFFFFF;
     margin: 2em auto;
     padding: 1em;
     text-align: center;
 }
-.form input {
+.form-element input,
+.form-element textarea{
     outline: 0;
     background: #f2f2f2;
     width: 100%;
@@ -269,8 +283,12 @@ hr{
     margin: 0 0 15px;
     padding: 1em;
     box-sizing: border-box;
+
 }
-.form button {
+.form-element textarea {
+    resize: vertical;
+}
+.form-element button.submit-form {
     text-transform: uppercase;
     outline: 0;
     background: rgba(91, 185, 234, 1);
@@ -279,14 +297,20 @@ hr{
     padding: 1em;
     color: #FFFFFF;
     font-size: 14px;
-    -webkit-transition: all 0.3 ease;
-    transition: all 0.3 ease;
+    -webkit-transition: all .5s ease;
+    transition: all .5s ease;
     cursor: pointer;
 }
-.form button:hover,.form button:active,.form button:focus {
+.form-element button.submit-form:hover, .form-element button.submit-form:active, .form-element button.submit-form:focus {
     background: rgba(91, 185, 234, .8);
-    -webkit-transition: all 0.3 ease;
-    transition: all 0.3 ease;
+    -webkit-transition: all .5s ease;
+    transition: all .5s ease;
+}
+
+.form-control{
+    border-radius: 0;
+    padding: .75em;
+    height: 45px;
 }
 
 /**
@@ -590,6 +614,24 @@ html { height: 100%;}
     z-index: 1;
 }
 
+.navbar-default{
+    background: none;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.navbar-default .navbar-nav > .active > a{
+    background-color: rgba(91, 185, 234, 1);
+    color: #ffffff;
+}
+.navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover{
+    background-color: rgba(91, 185, 234, .75);
+    -webkit-transition: all .35s ease-in-out;
+    color: #ffffff;
+}
+
+
 /**
 *   pagination
 */
@@ -647,6 +689,14 @@ span.size5{ font-size: 18px; }
 div.thumbnail{
     background-color: rgba(0, 0, 0, 0.2);
     border: 1px solid rgba(251, 209, 97, 0.25);
+}
+
+pre{
+    background: none;
+    border: none;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
 }
 
 .info-text{
@@ -768,14 +818,6 @@ div.user-info{
     text-align: center;
 }
 
-.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover{
-    background-color: #337AB7;
-    color: #ffffff;
-}
-.navbar-default .navbar-brand,
-.navbar-default .navbar-brand:hover{
-    color: #337AB7;
-}
 
 /**
 *   media query for RWD
@@ -827,6 +869,15 @@ div.user-info{
 
 }
 
+@media all and (min-width: 768px) {
+    .navbar{
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        border-radius: 0;
+    }
+}
+
+
 /* Portrait */
 @media screen and (orientation:portrait) {
 
@@ -871,6 +922,66 @@ only screen and (min-device-pixel-ratio: 1.5) {
 
 }
 
+/**
+*   buttons
+*/
+.btn-submit-full{
+    width: 100%;
+}
+.btn-submit, .btn-submit-edit, .btn-submit-delete{
+    outline: 0;
+    border: 0;
+    padding: .75em;
+    color: #FFFFFF;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 0;
+    transition: all .5s ease;
+}
+
+.btn-submit{
+    border: 2px solid rgba(46, 178, 226, .75);
+    background: rgba(104, 207, 245, 1);
+}
+.btn-submit-edit{
+    border: 2px solid rgba(91, 213, 146, .75);
+    background: rgba(86, 232, 152, 1);
+}
+.btn-submit-delete{
+    border: 2px solid rgba(230, 33, 33, .75);
+    background: rgba(226, 61, 65, 1);
+}
+
+.btn-submit:hover, .btn-submit:focus, .btn-submit:active {
+    border: 2px solid rgba(46, 178, 226, .75);
+    background: rgba(104, 207, 245, .8);
+    color: #fff;
+}
+.btn-submit-edit:hover, .btn-submit-edit:focus, .btn-submit-edit:active {
+    border: 2px solid rgba(91, 213, 146, .75);
+    background: rgba(86, 232, 152, .8);
+    color: #fff;
+}
+.btn-submit-delete:hover, .btn-submit-delete:focus, .btn-submit-delete:active {
+    border: 2px solid rgba(230, 33, 33, .75);
+    background: rgba(226, 61, 65, .8);
+    color: #fff;
+}
+
+/* chrome, opera, ff - visited fix */
+.btn-submit:hover, .btn-submit:focus, .btn-submit:active{
+    color: #fff !important;
+}
+.btn-submit-edit:hover, .btn-submit-edit:focus, .btn-submit-edit:active{
+    color: #fff !important;
+}
+.btn-submit-delete:hover, .btn-submit-delete:focus, .btn-submit-delete:active{
+    color: #fff !important;
+}
+
+.btn-submit:visited, .btn-submit-edit:visited, .btn-submit-delete:visited {
+    color: #fff;
+}
 
 /**
 *   checkbox / radio input buttons

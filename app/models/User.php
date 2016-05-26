@@ -21,7 +21,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 */
 
 	/**
-	 * validation rules for user entities
+	 * validation rules for entities
 	 *
 	 */
 	public static $rules = ['email' => 'required|email|between:5,50|unique:users',

@@ -34,7 +34,16 @@ class PublicController extends BaseController {
 	 */
 	public function showAboutUs()
 	{
-		return View::make('public.about-us')->with(['page_title' => 'O nama']);
+		$about_us_data = AboutUs::first();
+
+		if($about_us_data == null){
+			$about_us_data['post_body'] = null;
+			$about_us_data['image_file_name'] = null;
+		}
+
+		return View::make('public.about-us')->with(['page_title' => 'O nama',
+													'about_us_data' => $about_us_data
+        ]);
 	}
 
 	/**
