@@ -13,7 +13,7 @@
                             <li class="grid-sizer"></li><!-- for Masonry column width -->
                             @foreach($image_gallery_data as $img)
                                 <li>
-                                    {{HTML::image('/image_gallery_uploads/'.$img->file_name, imageAlt($img->file_name), ['title' => imageAlt($img->file_name), 'class' => 'img-responsive img-thumbnail'])}}
+                                    {{HTML::image('/image_gallery_uploads/'.$img->file_name, imageAlt($img->file_name), ['title' => imageAlt($img->file_name), 'class' => 'img-responsive img-thumbnail lazy'])}}
                                 </li>
                             @endforeach
                         </ul>

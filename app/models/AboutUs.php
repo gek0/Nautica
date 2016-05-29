@@ -6,6 +6,7 @@ class AboutUS extends Eloquent {
      * AboutUs Database Model
      * 	-	id INT UNSIGNED / AUTO_INCREMENT PRIMARY KEY
      *  -	post_body TEXT
+     *  -	post_body_eng TEXT
      *  -	image_file_name VARCHAR(255)
      *  -	image_file_size DOUBLE
      *  - 	created_at TIMESTAMP
@@ -16,7 +17,8 @@ class AboutUS extends Eloquent {
      * validation rules for entities
      *
      */
-    public static $rules = ['post_body' => 'required|',
+    public static $rules = ['post_body' => 'required',
+                            'post_body_eng' => 'required',
                             'image_file_name' => 'image|max:3000'
     ];
 
@@ -24,6 +26,7 @@ class AboutUS extends Eloquent {
      * validation error messages
      */
     public static $messages = ['post_body.required' => 'Tekst stranice je obavezan.',
+                                'post_body_eng.required' => 'Tekst engleske stranice je obavezan.',
                                 'image_file_name.image' => 'Dozvoljeni formati slike su: .jpeg, .png, .bmp i .gif.',
                                 'image_file_name.max' => 'Maksimalna veličina slike je 3MB.',
     ];

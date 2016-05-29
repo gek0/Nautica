@@ -13,9 +13,23 @@
                 </div>
             @endif
 
-            <blockquote>
-                {{ removeEmptyP(nl2p((new BBCParser)->parse($about_us_data['post_body']))) }}
-            </blockquote>
+            <ul class="nav nav-pills custom-pills">
+                <li class="active"><a data-toggle="pill" href="#HR">Hrvatski</a></li>
+                <li><a data-toggle="pill" href="#ENG">English</a></li>
+            </ul>
+
+            <div class="tab-content space">
+                <div id="HR" class="tab-pane fade in active">
+                    <blockquote>
+                        {{ removeEmptyP(nl2p((new BBCParser)->parse($about_us_data['post_body']))) }}
+                    </blockquote>
+                </div>
+                <div id="ENG" class="tab-pane fade">
+                    <blockquote>
+                        {{ removeEmptyP(nl2p((new BBCParser)->parse($about_us_data['post_body_eng']))) }}
+                    </blockquote>
+                </div>
+            </div>
         </div>
     </div>
 

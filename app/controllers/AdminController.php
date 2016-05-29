@@ -28,12 +28,13 @@ class AdminController extends BaseController {
         $about_us_data = AboutUs::first();
 
         if($about_us_data == null){
-            $about_us_data['post_body'] = null;
+            $about_us_data['post_body'] = 'Tekst stranice...(HR)';
+            $about_us_data['post_body_eng'] = 'Tekst stranice...(ENG)';
             $about_us_data['image_file_name'] = null;
         }
 
         return View::make('admin.about-us')->with(['page_title' => 'Administracija',
-            'about_us_data' => $about_us_data
+                                                    'about_us_data' => $about_us_data
         ]);
     }
 
@@ -43,7 +44,7 @@ class AdminController extends BaseController {
      */
     public function updateAboutUs()
     {
-        $form_data = ['post_body' => e(Input::get('post_body')), 'image_file_name' => Input::file('about_us_image')];
+        $form_data = ['post_body' => e(Input::get('post_body')), 'post_body_eng' => e(Input::get('post_body_eng')), 'image_file_name' => Input::file('about_us_image')];
         $token = Input::get('_token');
 
         //check if csrf token is valid
@@ -66,6 +67,7 @@ class AdminController extends BaseController {
                 $about_us = $check_data;
             }
             $about_us->post_body = $form_data['post_body'];
+            $about_us->post_body_eng = $form_data['post_body_eng'];
 
             //check if there is image
             if($form_data['image_file_name'] == true){

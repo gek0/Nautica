@@ -16,7 +16,7 @@ class PublicController extends BaseController {
 	 */
 	public function showHome()
 	{
-		return View::make('public.index')->with(['page_title' => 'Dobrodošli']);
+		return View::make('public.index')->with(['page_title' => 'Dobrodošli / Welcome']);
 	}
 
 	/**
@@ -27,7 +27,7 @@ class PublicController extends BaseController {
 	{
 		$image_gallery_data = Gallery::orderBy('id', 'DESC')->get();
 
-		return View::make('public.image-gallery')->with(['page_title' => 'Galerija',
+		return View::make('public.image-gallery')->with(['page_title' => 'Galerija / Gallery',
 														'image_gallery_data' => $image_gallery_data
 		]);
 	}
@@ -41,11 +41,12 @@ class PublicController extends BaseController {
 		$about_us_data = AboutUs::first();
 
 		if($about_us_data == null){
-			$about_us_data['post_body'] = null;
+			$about_us_data['post_body'] = 'Tekst stranice...(HR)';
+			$about_us_data['post_body_eng'] = 'Tekst stranice...(ENG)';
 			$about_us_data['image_file_name'] = null;
 		}
 
-		return View::make('public.about-us')->with(['page_title' => 'O nama',
+		return View::make('public.about-us')->with(['page_title' => 'O nama / About Us',
 													'about_us_data' => $about_us_data
         ]);
 	}

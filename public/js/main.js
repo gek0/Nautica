@@ -48,6 +48,15 @@ $(document).ready(function(){
     *   masonry gallery
      */
     new CBPGridGallery(document.getElementById('grid-gallery') );
+
+    /**
+     *   add lazy loading to images out of screen viewport
+     */
+    $(function() {
+        $("img.lazy").lazyload({
+            effect : "fadeIn"
+        });
+    });
 });
 
 /**

@@ -11,7 +11,7 @@ jQuery(document).ready(function(){
         lang: "hr",
         buttons: "bold,italic,underline,strike,sup,sub,|,justifyleft,justifycenter,justifyright,fontSize,quote,|,table,bullist,numlist,fontcolor,code,|,link,video,removeFormat"
     }
-    $("#codeEditor").wysibb(lg);
+    $("#codeEditor, #codeEditor2").wysibb(lg);
 
     /**
      *   add lazy loading to images out of screen viewport

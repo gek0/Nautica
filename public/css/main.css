@@ -976,6 +976,16 @@ div.user-info{
     text-align: center;
 }
 
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:focus,
+.nav-pills > li.active > a:hover{
+    background: #5BB9EA;
+}
+.nav-pills > li > a{
+    border-radius: 0;
+}
+
+
 
 /**
 *   media query for RWD
@@ -1352,6 +1362,7 @@ only screen and (min-device-pixel-ratio: 1.5) {
 #check-adjust{
     font-size: 1em;
 }
+
 
 
 /**
