@@ -6,7 +6,7 @@
 <!--[if (gt IE 9)|!(IE)]><!--> <html lang="hr" class="no-js"> <!--<![endif]-->
 <head>
     <meta charset="utf-8">
-    <title>... :: {{ $page_title or 'Dobrodošli' }}</title>
+    <title>Nautica Adventures :: {{ $page_title or 'Dobrodošli' }}</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="...">
@@ -18,7 +18,14 @@
     <meta property="og:site_name" content="..." />
     <meta property="og:description" content="..." />
 
-    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+    <!-- favicons and apple icon -->
+    <!--[if IE]><link rel="shortcut icon" href="{{ asset('favicon.ico') }}"><![endif]-->
+    <link rel="icon" href="{{ asset('favicon.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('touch-icon-iphone.png') }}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('touch-icon-ipad.png') }}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('touch-icon-iphone-retina.png') }}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('touch-icon-ipad-retina.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('touch-icon-iphone-6-plus.png') }}">
     <link rel="canonical" href="{{ Request::url() }}" />
 
     <!-- scripts -->
@@ -61,13 +68,13 @@
                 <a href="{{ url('info') }}"><i class="fa fa-ship pr-10" aria-hidden="true"></i> Rute-Informacije</a>
             </li>
             <li>
-                <a href="{{ url('kontakt') }}"><i class="fa fa-envelope-o pr-10" aria-hidden="true"></i> Kontakt</a>
+                <a href="{{ url('o-nama') }}"><i class="fa fa-info pr-20" aria-hidden="true"></i> O nama</a>
             </li>
             <li>
                 <a href="{{ url('galerija') }}"><i class="fa fa-picture-o pr-10" aria-hidden="true"></i> Galerija</a>
             </li>
             <li>
-                <a href="{{ url('o-nama') }}"><i class="fa fa-info pr-20" aria-hidden="true"></i> O nama</a>
+                <a href="{{ url('kontakt') }}"><i class="fa fa-envelope-o pr-10" aria-hidden="true"></i> Kontakt</a>
             </li>
             <li>
                 <a href="#"><i class="fa fa-facebook pr-20" aria-hidden="true"></i> Facebook</a>

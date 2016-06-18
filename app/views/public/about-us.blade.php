@@ -13,7 +13,7 @@
                 </div>
             @endif
 
-            <ul class="nav nav-pills custom-pills">
+            <ul class="nav nav-pills custom-pills center-pills">
                 <li class="active"><a data-toggle="pill" href="#HR">Hrvatski</a></li>
                 <li><a data-toggle="pill" href="#ENG">English</a></li>
             </ul>

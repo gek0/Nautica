@@ -122,6 +122,7 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Golonka\BBCode\BBCodeParserServiceProvider',
+		'Anhskohbo\NoCaptcha\NoCaptchaServiceProvider',
 	),
 
 	/*
