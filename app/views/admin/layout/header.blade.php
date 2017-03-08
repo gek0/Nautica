@@ -66,6 +66,7 @@
                 <nav class="navbar navbar-default">
                     <div class="container-fluid">
                         <ul class="nav navbar-nav">
+                            {{ HTML::smartRoute_link('/', 'Pregled stranice', '<i class="fa fa-search"></i>') }}
                             {{ HTML::smartRoute_link('admin/pocetna', 'Početna', '<i class="fa fa-home"></i>') }}
                             {{ HTML::smartRoute_link('admin/galerija', 'Galerija', '<i class="fa fa-camera"></i>') }}
                             {{ HTML::smartRoute_link('admin/o-nama', 'O nama', '<i class="fa fa-info"></i>') }}

@@ -1,9 +1,9 @@
 <?php
 
-class AboutUs extends Eloquent {
+class Info extends Eloquent {
 
     /**
-     * AboutUs Database Model
+     * Info Database Model
      * 	-	id INT UNSIGNED / AUTO_INCREMENT PRIMARY KEY
      *  -	post_body TEXT
      *  -	post_body_eng TEXT
@@ -36,6 +36,6 @@ class AboutUs extends Eloquent {
      *
      * @var string
      */
-    protected $table = 'about_us';
+    protected $table = 'info';
 
 }

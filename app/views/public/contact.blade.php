@@ -29,7 +29,7 @@
                     <h3>Kontaktirajte nas / Contact us</h3>
                     <p class="contact-detail">Za sve upite, nejasnoće i slično, kontaktirajte nas preko kontakt forme (<strong>sva polja su obavezna</strong>) ili preko gore navedenih informacija.</p>
                     <hr>
-                    <p class="contact-detail">For all questions and extra information, contats us using contact form (<strong>all fields are mandatory</strong>) or using iformation above.</p>
+                    <p class="contact-detail">For all questions and extra information, contact us using contact form (<strong>all fields are mandatory</strong>) or using information above.</p>
                 </blockquote>
             </div>
 

@@ -142,6 +142,16 @@ class PublicController extends BaseController {
 	 */
 	public function showInfo()
 	{
-		return View::make('public.info')->with(['page_title' => 'Rute - Informacije']);
+		$info_data = Info::first();
+
+		if($info_data == null){
+			$info_data['post_body'] = 'Tekst stranice...(HR)';
+			$info_data['post_body_eng'] = 'Tekst stranice...(ENG)';
+			$info_data['image_file_name'] = null;
+		}
+
+		return View::make('public.info')->with(['page_title' => 'Tours - Info',
+												'info_data' => $info_data
+		]);
 	}
 }

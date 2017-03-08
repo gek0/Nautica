@@ -6,7 +6,6 @@
 
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2">
-
             @if($about_us_data['image_file_name'])
                 <div class="text-center space">
                     {{HTML::image('/about_us_image/'.$about_us_data['image_file_name'], 'Nautica_o_nama', ['title' => $about_us_data['image_file_name'], 'class' => 'img-thumbnail img-responsive'])}}

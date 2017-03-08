@@ -3,11 +3,11 @@
 @-ms-viewport { width: device-width; }
 @viewport { width: device-width; }
 /* --------------------------------------------------------
-Style Sheet for Nautica
+Style Sheet for Nautica Adventure
 
 author: Matija Buriša
 email: matijaburisa@gmail.com
-website: Nautica
+website: Nautica Adventure
 ----------------------------------------------------------*/
 @import 'animate.css';
 @import 'bootstrap-select.min.css';
@@ -130,7 +130,7 @@ h1 { font-size: 2em; line-height: 1.25; }
 h2 { font-size: 1.625em; line-height: 1.15384615; }
 h3 { font-size: 1.375em; line-height: 1.13636364; }
 h4 { font-size: 1.125em; line-height: 1.11111111; }
-blockquote { font-size: .75em; line-height: 1.25; }
+blockquote { font-size: .75em; line-height: 1.25; background: rgba(252, 252, 252, 1); }
 
 @media (min-width: 43.75em) {
     h1 { font-size: 2.5em; line-height: 1.125; }
@@ -156,7 +156,7 @@ a{
     color: #7b7b7b;
 }
 a:visited, a:hover, a:active{
-    color: #954718;
+    color: #dfdfdf;
 }
 
 .pr-10 { padding-right: 10px; }
@@ -371,6 +371,7 @@ html { height: 100%;}
 #page-content-wrapper {
     width: 100%;
     padding-top: 70px;
+    padding-bottom: 220px;
 }
 
 #wrapper.toggled #page-content-wrapper {
@@ -486,6 +487,23 @@ html { height: 100%;}
     border: none;
     background-color: #222;
     box-shadow: none;
+}
+
+ul.bottom-nav{
+    width: 100%;
+    height: auto;
+    position: absolute;
+    bottom: 0;
+    border: none;
+    list-style: none;
+}
+
+ul.bottom-nav li a{
+    padding: .25em;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+    height: auto;
 }
 
 /*-------------------------------*/
@@ -1510,8 +1528,8 @@ only screen and (min-device-pixel-ratio: 1.5) {
 }
 
 .slideshow li {
-    width: 660px;
-    height: 560px;
+    width: 760px;
+    height: 510px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -1694,5 +1712,52 @@ span.nav-close:before {
 @media screen and (max-width: 24em) {
     .grid li {
         width: 100%;
+    }
+}
+
+/* waves in footer */
+
+.ocean {
+    height: 5%;
+    width: 100%;
+    margin-top: 2em;
+    position: fixed;
+    bottom: 0;
+    background: #055091;
+    text-align: center;
+    color: #ffffff;
+}
+
+.wave {
+    background: url('assets/images/waves.svg') repeat-x;
+    position: absolute;
+    top: -198px;
+    width: 6400px;
+    height: 198px;
+    animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) infinite;
+    transform: translate3d(0, 0, 0);
+}
+
+.wave:nth-of-type(2) {
+    top: -175px;
+    animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) -.125s infinite, swell 7s ease -1.25s infinite;
+    opacity: 1;
+}
+
+@keyframes wave {
+    0% {
+        margin-left: 0;
+    }
+    100% {
+        margin-left: -1600px;
+    }
+}
+
+@keyframes swell {
+    0%, 100% {
+        transform: translate3d(0,-25px,0);
+    }
+    50% {
+        transform: translate3d(0,5px,0);
     }
 }

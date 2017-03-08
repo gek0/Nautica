@@ -6,7 +6,29 @@
 
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2">
-            ...
+            @if($info_data['image_file_name'])
+                <div class="text-center space">
+                    {{HTML::image('/info_image/'.$info_data['image_file_name'], 'Nautica_Informacije', ['title' => $info_data['image_file_name'], 'class' => 'img-thumbnail img-responsive'])}}
+                </div>
+            @endif
+
+            <ul class="nav nav-pills custom-pills center-pills">
+                <li class="active"><a data-toggle="pill" href="#HR">Hrvatski</a></li>
+                <li><a data-toggle="pill" href="#ENG">English</a></li>
+            </ul>
+
+            <div class="tab-content space">
+                <div id="HR" class="tab-pane fade in active">
+                    <blockquote>
+                        {{ removeEmptyP(nl2p((new BBCParser)->parse($info_data['post_body']))) }}
+                    </blockquote>
+                </div>
+                <div id="ENG" class="tab-pane fade">
+                    <blockquote>
+                        {{ removeEmptyP(nl2p((new BBCParser)->parse($info_data['post_body_eng']))) }}
+                    </blockquote>
+                </div>
+            </div>
         </div>
     </div>
 

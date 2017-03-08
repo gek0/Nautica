@@ -59,25 +59,31 @@
     <!-- Sidebar -->
     <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
         <ul class="nav sidebar-nav">
-            <li class="sidebar-brand">
+            <li class="sidebar-brand text-center">
                 <a href="{{ url('/') }}">
-                    <i class="fa fa-home pr-10" aria-hidden="true"></i> Nautica
+                    Nautica Adventure
                 </a>
             </li>
             <li>
-                <a href="{{ url('info') }}"><i class="fa fa-ship pr-10" aria-hidden="true"></i> Rute-Informacije</a>
+                <a href="{{ url('info') }}"><i class="fa fa-ship pr-10" aria-hidden="true"></i> Tours - Info</a>
             </li>
             <li>
-                <a href="{{ url('o-nama') }}"><i class="fa fa-info pr-20" aria-hidden="true"></i> O nama</a>
+                <a href="{{ url('o-nama') }}"><i class="fa fa-info pr-20" aria-hidden="true"></i> About us</a>
             </li>
             <li>
-                <a href="{{ url('galerija') }}"><i class="fa fa-picture-o pr-10" aria-hidden="true"></i> Galerija</a>
+                <a href="{{ url('galerija') }}"><i class="fa fa-picture-o pr-10" aria-hidden="true"></i> Gallery</a>
             </li>
             <li>
-                <a href="{{ url('kontakt') }}"><i class="fa fa-envelope-o pr-10" aria-hidden="true"></i> Kontakt</a>
+                <a href="{{ url('kontakt') }}"><i class="fa fa-envelope-o pr-10" aria-hidden="true"></i> Contact</a>
             </li>
             <li>
-                <a href="#"><i class="fa fa-facebook pr-20" aria-hidden="true"></i> Facebook</a>
+                <a href="{{ url('https://www.facebook.com/NauticaAdventureHvar') }}" target="_blank"><i class="fa fa-facebook pr-20 text-center" aria-hidden="true"></i>Facebook</a>
+            </li>
+        </ul>
+
+        <ul class="bottom-nav">
+            <li>
+                <a href="{{ url('prijava') }}"><i class="fa fa-lock pr-10" aria-hidden="true"></i> Prijava</a>
             </li>
         </ul>
     </nav>

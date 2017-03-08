@@ -20,7 +20,9 @@ Route::group(['before' => 'auth'], function() {
 	});
 
 	Route::group(['prefix' => 'admin'], function() {
+		Route::post('pocetna', ['as' => 'adminPOST', 'uses' => 'AdminController@updateHome']);
 		Route::get('pocetna', ['as' => 'admin', 'uses' => 'AdminController@showHome']);
+        Route::get('pocetna-brisanje-slike', ['as' => 'admin-info-image-delete', 'uses' => 'AdminController@deleteInfoImage']);
 
 		Route::post('o-nama', ['as' => 'admin-about-usPOST', 'uses' => 'AdminController@updateAboutUs']);
 		Route::get('o-nama', ['as' => 'admin-about-us', 'uses' => 'AdminController@showAboutUs']);

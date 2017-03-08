@@ -16,7 +16,17 @@ class AdminController extends BaseController {
      */
     public function showHome()
     {
-        return View::make('admin.index')->with(['page_title' => 'Administracija']);
+        $info_data = Info::first();
+
+        if($info_data == null){
+            $info_data['post_body'] = 'Tekst stranice...(HR)';
+            $info_data['post_body_eng'] = 'Tekst stranice...(ENG)';
+            $info_data['image_file_name'] = null;
+        }
+
+        return View::make('admin.index')->with(['page_title' => 'Administracija',
+                                                'info_data' => $info_data
+        ]);
     }
 
     /**
@@ -86,7 +96,7 @@ class AdminController extends BaseController {
                 $full_name = $file_name.'.'.$file_extension;
                 $file_size = $form_data['image_file_name']->getSize();
 
-                $file_uploaded = $form_data['image_file_name']->move($path, $full_name);
+                $form_data['image_file_name']->move($path, $full_name);
 
                 $about_us->image_file_name = $full_name;
                 $about_us->image_file_size = $file_size;
@@ -99,12 +109,72 @@ class AdminController extends BaseController {
     }
 
     /**
-     * delete image from abut us section
+     * update info database model
      * @return mixed
      */
+    public function updateHome()
+    {
+        $form_data = ['post_body' => e(Input::get('post_body')), 'post_body_eng' => e(Input::get('post_body_eng')), 'image_file_name' => Input::file('info_image')];
+        $token = Input::get('_token');
+
+        //check if csrf token is valid
+        if(Session::token() != $token){
+            return Redirect::back()->withErrors('Nevažeći CSRF token!');
+        }
+
+        $validator = Validator::make($form_data, Info::$rules, Info::$messages);
+        //check validation results and category if ok
+        if($validator->fails()){
+            return Redirect::back()->withErrors($validator->getMessageBag()->toArray())->withInput();
+        }
+        else{
+            //only one record in database
+            $check_data = Info::first();
+            if($check_data == null){
+                $info = new Info;
+            }
+            else{
+                $info = $check_data;
+            }
+            $info->post_body = $form_data['post_body'];
+            $info->post_body_eng = $form_data['post_body_eng'];
+
+            //check if there is image
+            if($form_data['image_file_name'] == true){
+                //check for image directory
+                $path = public_path().'/info_image/';
+                //delete existing image
+                File::deleteDirectory($path);
+
+                if(!File::exists($path)){
+                    //recreate directory
+                    File::makeDirectory($path, 0777);
+                }
+
+                $file_name = 'Nautica_info';
+                $file_extension = $form_data['image_file_name']->getClientOriginalExtension();
+                $full_name = $file_name.'.'.$file_extension;
+                $file_size = $form_data['image_file_name']->getSize();
+
+                $form_data['image_file_name']->move($path, $full_name);
+
+                $info->image_file_name = $full_name;
+                $info->image_file_size = $file_size;
+            }
+
+            $info->save();
+        }
+
+        return Redirect::to('admin/pocetna')->with(['success' => 'Stranica je uspješno izmjenjena']);
+    }
+
+    /**
+ * delete image from abut us section
+ * @return mixed
+ */
     public function deleteAboutUsImage()
     {
-        $about_us = AboutUS::first();
+        $about_us = AboutUs::first();
 
         $path = public_path().'/about_us_image/';
 
@@ -124,6 +194,35 @@ class AdminController extends BaseController {
         }
         catch(Exception $e){
             return Redirect::to('admin/o-nama')->withErrors('Slika nije mogla biti obrisana');
+        }
+    }
+
+    /**
+     * delete image from home section
+     * @return mixed
+     */
+    public function deleteInfoImage()
+    {
+        $info = Info::first();
+
+        $path = public_path().'/info_image/';
+
+        try {
+            // delete from hard disk
+            if (File::exists($path)) {
+                //delete existing image
+                File::deleteDirectory($path);
+            }
+
+            // update database
+            $info->image_file_name = '';
+            $info->image_file_size = '';
+            $info->save();
+
+            return Redirect::to('admin/pocetna')->with(['success' => 'Slika je uspješno obrisana']);
+        }
+        catch(Exception $e){
+            return Redirect::to('admin/pocetna')->withErrors('Slika nije mogla biti obrisana');
         }
     }
 

@@ -92,9 +92,9 @@ jQuery(document).ready(function(){
 });
 
 $(document).ready(function(){
-    /*
+    /**
     *   navigation
-     */
+    */
     var trigger = $('.hamburger'),
         overlay = $('.overlay'),
         isClosed = false;
@@ -122,10 +122,12 @@ $(document).ready(function(){
         $('#wrapper').toggleClass('toggled');
     });
 
-    /*
+    /**
     *   masonry gallery
-     */
-    new CBPGridGallery(document.getElementById('grid-gallery') );
+    */
+    //if($('grid-gallery').length > 0){
+        new CBPGridGallery(document.getElementById('grid-gallery'));
+    //}
 
     /**
      *   add lazy loading to images out of screen viewport

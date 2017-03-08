@@ -8,6 +8,7 @@
                 <li class="active"><a data-toggle="pill" href="#HR">Hrvatski <i class="fa fa-edit"></i></a></li>
                 <li><a data-toggle="pill" href="#ENG">English <i class="fa fa-edit"></i></a></li>
             </ul>
+            <hr>
 
             <div class="tab-content">
                 <div id="HR" class="tab-pane fade in active">
@@ -37,6 +38,7 @@
                 @if($about_us_data['image_file_name'])
                     {{HTML::image('/about_us_image/'.$about_us_data['image_file_name'], 'Nautica_o_nama', ['title' => $about_us_data['image_file_name'], 'class' => 'img-thumbnail img-responsive'])}}
 
+                    <hr>
                     <a href="{{ route('admin-about-us-image-delete') }}" class="space">
                         <button class="btn btn-submit-delete">
                             Obriši <i class="fa fa-trash"></i>
@@ -51,7 +53,7 @@
 
     <script>
         jQuery(window).load(function() {
-            /*
+            /**
              *   BBCode editor returning blank text on refresh, FF bug
              */
             var editor = $("#codeEditor, #codeEditor2");
