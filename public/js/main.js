@@ -125,9 +125,7 @@ $(document).ready(function(){
     /**
     *   masonry gallery
     */
-    //if($('grid-gallery').length > 0){
-        new CBPGridGallery(document.getElementById('grid-gallery'));
-    //}
+    new CBPGridGallery(document.getElementById('grid-gallery'));
 
     /**
      *   add lazy loading to images out of screen viewport
@@ -137,6 +135,20 @@ $(document).ready(function(){
             effect : "fadeIn"
         });
     });
+
+    /**
+     *   wind rose on main page
+     */
+    var imageHeight = $(".img-block img").height();
+    $("table").css("height", imageHeight + 50 + "px");
+});
+
+/**
+ *   wind rose on main page
+ */
+$(window).resize(function() {
+    var imageResizeHeight = $(".img-block img").height();
+    $("table").css("height", imageResizeHeight + 50 + "px");
 });
 
 /**

@@ -32,4 +32,11 @@
         </div>
     </div>
 
+    <hr>
+    <div class="text-center">
+        <a href="{{ url('/') }}" title="Homepage">
+            <button class="btn btn-submit btn-padded"><i class="fa fa-home" aria-hidden="true"></i>  Nautica Adventure </button>
+        </a>
+    </div>
+
 @include('public.layout.footer')

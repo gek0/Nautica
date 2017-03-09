@@ -9,7 +9,7 @@
             <!-- start contact details -->
             <div class="row text-center">
                 <div class="col-md-4 color-filled">
-                    <strong><i class="fa fa-map-marker fa-med"></i> Adresa/address:</strong><br>
+                    <strong><i class="fa fa-map-marker fa-med"></i> Adresa/Address:</strong><br>
                     <p class="contact-detail"> {{ getenv('OWNER_CONTACT_ADDRESS') }}</p><br>
                 </div>
                 <div class="col-md-4 color-filled">
@@ -82,6 +82,13 @@
                 </noscript>
             </section> <!-- end map section -->
         </div>
+    </div>
+
+    <hr>
+    <div class="text-center">
+        <a href="{{ url('/') }}" title="Homepage">
+            <button class="btn btn-submit btn-padded"><i class="fa fa-home" aria-hidden="true"></i>  Nautica Adventure </button>
+        </a>
     </div>
 
 @include('public.layout.footer')
