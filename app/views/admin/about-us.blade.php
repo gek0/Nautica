@@ -25,6 +25,15 @@
                 </div>
             </div>
             <div class="form-group">
+                <p><strong>Pozicija teksta nad slikom:</strong></p>
+                <label class="radio-inline">
+                    {{ Form::radio('text_position', 'left', ($about_us_data['text_position'] == 'left' ? true : false), ['class' => 'radio radio-primary']) }} LIJEVA strana
+                </label>
+                <label class="radio-inline">
+                    {{ Form::radio('text_position', 'right', ($about_us_data['text_position'] == 'right' ? true : false), ['class' => 'radio radio-primary']) }} DESNA strana
+                </label>
+            </div>
+            <div class="form-group">
                 {{ Form::label('about_us_image', 'Dodaj sliku stranice:') }}
                 {{ Form::file('about_us_image', ['class' => 'file', 'data-show-upload' => false, 'data-show-caption' => true, 'id' => 'about_us_image', 'accept' => 'image/*']) }}
             </div>

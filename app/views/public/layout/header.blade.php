@@ -6,17 +6,18 @@
 <!--[if (gt IE 9)|!(IE)]><!--> <html lang="hr" class="no-js"> <!--<![endif]-->
 <head>
     <meta charset="utf-8">
-    <title>Nautica Adventures :: {{ $page_title or 'Dobrodošli' }}</title>
+    <title>Nautica Adventure :: {{ $page_title or 'Dobrodošli' }}</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords" content="...">
-    <meta name="description" content="...">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="hvar, plovila, iznajmljivanje, nautica">
+    <meta name="description" content="Tvrtka za iznajmljivanje plovila na otoku Hvaru">
     <meta name="author" content="Matija Buriša">
-    <meta property="og:title" content="..." />
+    <!-- Facebook integration -->
+    <meta property="og:title" content="Nautica Adventure" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{ Request::url('/') }}" />
-    <meta property="og:site_name" content="..." />
-    <meta property="og:description" content="..." />
+    <meta property="og:site_name" content="Nautica Adventure" />
+    <meta property="og:description" content="Tvrtka za iznajmljivanje plovila otoku Hvaru" />
 
     <!-- favicons and apple icon -->
     <!--[if IE]><link rel="shortcut icon" href="{{ asset('favicon.ico') }}"><![endif]-->
@@ -29,10 +30,10 @@
     <link rel="canonical" href="{{ Request::url() }}" />
 
     <!-- scripts -->
-    {{ HTML::script('js/jquery.min.js', ['charset' => 'utf-8']) }}
-    {{ HTML::script('js/bootstrap.min.js', ['charset' => 'utf-8']) }}
-    {{ HTML::script('js/modernizr.custom.js', ['charset' => 'utf-8']) }}
-    {{ HTML::script('js/classie.min.js', ['charset' => 'utf-8']) }}    
+    {{ HTML::script('https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js', ['charset' => 'utf-8']) }}
+    {{ HTML::script('js/modernizr.custom.public.js', ['charset' => 'utf-8']) }}
+    {{ HTML::script('js/jquery.lazyload.min.js', ['charset' => 'utf-8']) }}
+
     <!--[if lt IE 9]>
     {{ HTML::script('js/html5shiv.min.js', ['charset' => 'utf-8']) }}
     {{ HTML::script('js/respond.min.js', ['charset' => 'utf-8']) }}
@@ -41,60 +42,59 @@
     <!-- stylesheets -->
     {{ HTML::style('css/bootstrap.min.css') }}
     {{ HTML::style('css/main.css') }}
+    {{ HTML::style('css/jquery.fancybox.css') }}
+
+    {{ HTML::style('http://fonts.googleapis.com/css?family=Nunito:400,300,700') }}
+    {{ HTML::style('css/flickity.css') }}
+    {{ HTML::style('css/styles.css') }}
+    {{ HTML::style('css/queries.css') }}
 </head>
 <body>
-<div id="fakeloader"></div>
+
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<!-- facebook SDK -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+<!-- end facebook SDK -->
 
 <!-- notifications -->
 <div class="notificationOutput" id="outputMsg">
-    <div class="notificationTools" id="notifTool">
-        <span class="fa fa-times fa-med" id="notificationRemove"></span>
-        <span id="notificationTimer"></span>
-    </div>
+   <div class="notificationTools" id="notifTool">
+       <span class="fa fa-times fa-med" id="notificationRemove"></span>
+       <span id="notificationTimer"></span>
+   </div>
 </div>
 
-<div id="wrapper">
-    <div class="overlay"></div>
-
-    <!-- Sidebar -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
-        <ul class="nav sidebar-nav">
-            <li class="sidebar-brand text-center">
-                <a href="{{ url('/') }}">
-                    Nautica Adventure
-                </a>
-            </li>
-            <li>
-                <a href="{{ url('info') }}"><i class="fa fa-ship pr-10" aria-hidden="true"></i> Tours - Info</a>
-            </li>
-            <li>
-                <a href="{{ url('o-nama') }}"><i class="fa fa-info pr-20" aria-hidden="true"></i> About us</a>
-            </li>
-            <li>
-                <a href="{{ url('galerija') }}"><i class="fa fa-picture-o pr-10" aria-hidden="true"></i> Gallery</a>
-            </li>
-            <li>
-                <a href="{{ url('kontakt') }}"><i class="fa fa-envelope-o pr-10" aria-hidden="true"></i> Contact</a>
-            </li>
-            <li>
-                <a href="{{ url('https://www.facebook.com/NauticaAdventureHvar') }}" target="_blank"><i class="fa fa-facebook pr-20 text-center" aria-hidden="true"></i>Facebook</a>
-            </li>
-        </ul>
-
-        <ul class="bottom-nav">
-            <li>
-                <a href="{{ url('prijava') }}"><i class="fa fa-lock pr-10" aria-hidden="true"></i> Prijava</a>
-            </li>
-        </ul>
-    </nav>
-    <!-- /#sidebar-wrapper -->
-
-    <!-- Page Content -->
-    <div id="page-content-wrapper" class="container-fluid">
-        <button type="button" class="hamburger is-closed" data-toggle="offcanvas" title="Navigacija">
-            <span class="hamb-top"></span>
-            <span class="hamb-middle"></span>
-            <span class="hamb-bottom"></span>
-        </button>
-
-        <div class="container content-holder">
+<header>
+    <section class="hero" style="background: url('{{ url('/cover_image/cover_image_nautica.jpg') }}') no-repeat center center fixed; background-color: #FFFFFF; background-size: cover;">
+        <div class="texture-overlay"></div>
+        <div class="container">
+            <div class="row nav-wrapper">
+                <div class="col-md-6 col-sm-6 col-xs-6 text-left">
+                    <a href="{{ url('/') }}">{{ HTML::image('css/assets/images/logo_main_nav.png', 'Nautica Adventure logo', ['title' => 'Nautica Adventure']) }}</a>
+                </div>
+                <div class="col-md-5 col-sm-5 col-xs-5 text-right navicon">
+                    <p>MENU</p><a id="trigger-overlay" class="nav_slide_button nav-toggle pulseAnim" href="#"><span></span></a>
+                </div>
+                <div class="col-md-1 col-sm-1 col-xs-1 text-left navicon-2">
+                    <a href="{{ url('en') }}" title="Switch to english" alt="Switch to english"><span class="lang_en"></span></a>
+                </div>
+            </div>
+            <div class="row hero-content">
+                <div class="col-md-12">
+                    <h1 class="animated fadeInDown">Nautica Adventure</h1>
+                    <a href="#info" class="learn-btn animated fadeInUp">Pokreni avanturu <i class="fa fa-arrow-down"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+</header>

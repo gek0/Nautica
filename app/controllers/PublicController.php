@@ -16,48 +16,48 @@ class PublicController extends BaseController {
 	 */
 	public function showHome()
 	{
-		return View::make('public.index')->with(['page_title' => 'Dobrodošli / Welcome']);
-	}
+		$about_us_data = AboutUs::first();
+		if($about_us_data == null){
+			$about_us_data['post_body'] = 'Tekst stranice...(HR)';
+			$about_us_data['text_position'] = 'left';
+			$about_us_data['image_file_name'] = null;
+		}
 
-	/**
-	 * show gallery
-	 * @return mixed
-	 */
-	public function showGallery()
-	{
+		$video_gallery_data = VideoGallery::first();
 		$image_gallery_data = Gallery::orderBy('id', 'DESC')->get();
+		$testemonials_data = Testemonial::orderBy('id', 'DESC')->get();
 
-		return View::make('public.image-gallery')->with(['page_title' => 'Galerija / Gallery',
-														'image_gallery_data' => $image_gallery_data
+		return View::make('public.index')->with(['page_title' => 'Dobrodošli',
+												'about_us_data' => $about_us_data,
+												'video_gallery_data' => $video_gallery_data,
+												'image_gallery_data' => $image_gallery_data,
+												'testemonials_data' => $testemonials_data
 		]);
 	}
 
 	/**
-	 * show about us
+	 * show homepage in english
 	 * @return mixed
 	 */
-	public function showAboutUs()
+	public function showHomeEng()
 	{
 		$about_us_data = AboutUs::first();
-
 		if($about_us_data == null){
-			$about_us_data['post_body'] = 'Tekst stranice...(HR)';
-			$about_us_data['post_body_eng'] = 'Tekst stranice...(ENG)';
+			$about_us_data['post_body_eng'] = 'Page text...(ENG)';
+			$about_us_data['text_position'] = 'left';
 			$about_us_data['image_file_name'] = null;
 		}
 
-		return View::make('public.about-us')->with(['page_title' => 'O nama / About Us',
-													'about_us_data' => $about_us_data
-        ]);
-	}
+		$video_gallery_data = VideoGallery::first();
+		$image_gallery_data = Gallery::orderBy('id', 'DESC')->get();
+		$testemonials_data = Testemonial::orderBy('id', 'DESC')->get();
 
-	/**
-	 * show contact
-	 * @return mixed
-	 */
-	public function showContact()
-	{
-		return View::make('public.contact')->with(['page_title' => 'Kontakt / Contact']);
+		return View::make('public.en.index')->with(['page_title' => 'Welcome',
+												'about_us_data' => $about_us_data,
+												'video_gallery_data' => $video_gallery_data,
+												'image_gallery_data' => $image_gallery_data,
+												'testemonials_data' => $testemonials_data
+		]);
 	}
 
 	/**
@@ -117,13 +117,13 @@ class PublicController extends BaseController {
 					try{
 						Mail::send('email', $user_data, function($message) use ($user_data){
 							$message->from($user_data['email'], $user_data['full_name']);
-							$message->to(getenv('OWNER_CONTACT_EMAIL'))->subject('Nautica Adventure Web - nova poruka');
+							$message->to(getenv('OWNER_CONTACT_EMAIL'))->subject(getenv('WEB_EMAIL_SUBJECT').' - '.$user_data['subject']);
 						});
 						return Response::json(['status' => 'success']);
 					}
 					catch(Exception $e){
 						return Response::json(['status' => 'error',
-							'errors' => 'E-mail nije mogao biti poslan.'
+							'errors' => 'E-mail nije mogao biti poslan - E-mail was not sent.'
 						]);
 					}
 				}
@@ -131,27 +131,8 @@ class PublicController extends BaseController {
 		}
 		else{
 			return Response::json(['status' => 'error',
-				'errors' => 'Podaci nisu poslani Ajax-om!'
+				'errors' => 'Podaci nisu poslani Ajax-om! - Data not sent with Ajax!'
 			]);
 		}
-	}
-
-	/**
-	 * show info
-	 * @return mixed
-	 */
-	public function showInfo()
-	{
-		$info_data = Info::first();
-
-		if($info_data == null){
-			$info_data['post_body'] = 'Tekst stranice...(HR)';
-			$info_data['post_body_eng'] = 'Tekst stranice...(ENG)';
-			$info_data['image_file_name'] = null;
-		}
-
-		return View::make('public.info')->with(['page_title' => 'Tours - Info',
-												'info_data' => $info_data
-		]);
 	}
 }

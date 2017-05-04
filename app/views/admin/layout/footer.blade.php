@@ -1,5 +1,11 @@
 
     </div>
+        <div class="row text-center">
+            <hr>
+            <div class="col-md-12">
+                <p>&copy; <b>Nautica Adventure</b>, {{ date('Y') }} | Made with <i class="fa fa-heart pulseAnim" title="love"></i>  by <a href="{{ url('https://github.com/gek0') }}" target="_blank">Matija</a></p>
+            </div>
+        </div>
         </section>
 
     @include('admin.notification')

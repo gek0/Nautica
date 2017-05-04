@@ -3,32 +3,29 @@
  */
 
 jQuery(document).ready(function(){
-    // page loader public pages
-    $("#fakeloader").fakeLoader({
-        timeToHide: 500,
-        zIndex: 999,
-        spinner: "spinner5", // spinner1-7
-        bgColor: "#2086f4"
-    });
-
     /**
      *   google maps
      */
-    if($("#map").length > 0) {
-        var map;
-        // main directions
-        map = new GMaps({
-            el: '#map', lat: 43.1723624, lng: 16.4408177, zoom: 15, linksControl: true, zoomControl: true,
-            panControl: true, scrollwheel: false, streetViewControl: true
-        });
+     var map;
+     // main directions
+     map = new GMaps({
+        el: '#map', lat: 43.1723624, lng: 16.4408177, zoom: 15, linksControl: true, zoomControl: true,
+        panControl: true, scrollwheel: false, streetViewControl: true
+     });
 
-        // add address markers
-        var image = 'css/assets/images/map-marker.png';
-        map.addMarker({lat: 43.172686, lng: 16.4408177, title: 'Nautica Adventure', icon: image});
-        //apply custom styles
-        var styles = [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}];
-        map.setOptions({styles: styles});
-    }
+    /**
+     * navigation hover animations
+     */
+    $(".overlay-boxify > nav > ul > li").hover(function () {
+        $(this).toggleClass("pulseAnim");
+    });
+
+     // add address markers
+     var image = 'css/assets/images/map-marker.png';
+     map.addMarker({lat: 43.172686, lng: 16.4408177, title: 'Nautica Adventure', icon: image});
+     //apply custom styles
+     var styles = [{"featureType":"administrative.country","elementType":"geometry.fill","stylers":[{"visibility":"on"}]},{"featureType":"landscape","elementType":"all","stylers":[{"visibility":"on"}]}];
+     map.setOptions({styles: styles});
 
     /**
      *  email ajax script for main contact form
@@ -91,41 +88,103 @@ jQuery(document).ready(function(){
 
 });
 
-$(document).ready(function(){
-    /**
-    *   navigation
-    */
-    var trigger = $('.hamburger'),
-        overlay = $('.overlay'),
-        isClosed = false;
+/***************** Nav Transformicon ******************/
 
-    trigger.click(function () {
-        hamburger_cross();
-    });
+/* When user clicks the Icon */
+$(".nav-toggle").click(function() {
+    $(this).toggleClass("active");
+    $(".overlay-boxify").toggleClass("open");
+});
 
-    function hamburger_cross() {
+/* When user clicks a link */
+$(".overlay ul li a").click(function() {
+    $(".nav-toggle").toggleClass("active");
+    $(".overlay-boxify").toggleClass("open");
+});
 
-        if (isClosed == true) {
-            overlay.hide();
-            trigger.removeClass('is-open');
-            trigger.addClass('is-closed');
-            isClosed = false;
-        } else {
-            overlay.show();
-            trigger.removeClass('is-closed');
-            trigger.addClass('is-open');
-            isClosed = true;
+/* When user clicks outside */
+$(".overlay").click(function() {
+    $(".nav-toggle").toggleClass("active");
+    $(".overlay-boxify").toggleClass("open");
+});
+
+/***************** Smooth Scrolling ******************/
+
+$('a[href*=#]:not([href=#])').click(function() {
+    if (location.pathname.replace(/^\//, '') === this.pathname.replace(/^\//, '') && location.hostname === this.hostname) {
+
+        var target = $(this.hash);
+        target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+        if (target.length) {
+            $('html,body').animate({
+                scrollTop: target.offset().top
+            }, 2000);
+            return false;
         }
     }
+});
 
-    $('[data-toggle="offcanvas"]').click(function () {
-        $('#wrapper').toggleClass('toggled');
+$(document).ready(function(){
+    /**
+     * animations
+     */
+    /***************** Waypoints ******************/
+
+    $('.wp1').waypoint(function() {
+        $('.wp1').addClass('animated fadeInLeft');
+    }, {
+        offset: '75%'
     });
 
-    /**
-    *   masonry gallery
-    */
-    new CBPGridGallery(document.getElementById('grid-gallery'));
+    $('.wp2').waypoint(function() {
+        $('.wp2').addClass('animated fadeInDown');
+    }, {
+        offset: '75%'
+    });
+    $('.wp3').waypoint(function() {
+        $('.wp3').addClass('animated bounceInDown');
+    }, {
+        offset: '75%'
+    });
+    $('.wp4').waypoint(function() {
+        $('.wp4').addClass('animated fadeInDown');
+    }, {
+        offset: '75%'
+    });
+    $('.wpfine').waypoint(function() {
+        $('.wpfine').addClass('animated fadeInDown');
+    }, {
+        offset: '75%'
+    });
+
+    /***************** Flickity ******************/
+
+    $('#about-usSlider').flickity({
+        cellAlign: 'left',
+        contain: true,
+        prevNextButtons: false,
+        imagesLoaded: true
+    });
+
+    /***************** Fancybox ******************/
+
+    $(".youtube-media").on("click", function(e) {
+        var jWindow = $(window).width();
+        if (jWindow <= 768) {
+            return;
+        }
+        $.fancybox({
+            href: this.href,
+            padding: 4,
+            type: "iframe",
+            'href': this.href.replace(new RegExp("watch\\?v=", "i"), 'v/'),
+        });
+        return false;
+    });
+
+    $("a.single_image").fancybox({
+        padding: 4,
+    });
 
     /**
      *   add lazy loading to images out of screen viewport
@@ -135,20 +194,6 @@ $(document).ready(function(){
             effect : "fadeIn"
         });
     });
-
-    /**
-     *   wind rose on main page
-     */
-    var imageHeight = $(".img-block img").height();
-    $("table").css("height", imageHeight + 50 + "px");
-});
-
-/**
- *   wind rose on main page
- */
-$(window).resize(function() {
-    var imageResizeHeight = $(".img-block img").height();
-    $("table").css("height", imageResizeHeight + 50 + "px");
 });
 
 /**

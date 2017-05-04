@@ -30,6 +30,188 @@ class AdminController extends BaseController {
     }
 
     /**
+     * show admin testemonials
+     * @return mixed
+     */
+    public function showTestemonials()
+    {
+        $testemonials_data = Testemonial::orderBy('id', 'DESC')->get();
+
+        return View::make('admin.testemonials')->with(['page_title' => 'Administracija',
+                                                'testemonials_data' => $testemonials_data
+        ]);
+    }
+
+    /**
+     * add testemonial
+     * @return mixed
+     */
+    public function addTestemonial()
+    {
+        $form_data = ['testemonial_author' => e(Input::get('testemonial_author')), 'testemonial_text' => e(Input::get('testemonial_text'))];
+        $token = Input::get('_token');
+
+        //check if csrf token is valid
+        if(Session::token() != $token){
+            return Redirect::back()->withErrors('Nevažeći CSRF token!');
+        }
+
+        $validator = Validator::make($form_data, Testemonial::$rules, Testemonial::$messages);
+        //check validation results and category if ok
+        if($validator->fails()){
+            return Redirect::back()->withErrors($validator->getMessageBag()->toArray())->withInput();
+        }
+        else{
+            $testemonial = new Testemonial;
+            $testemonial->testemonial_author = $form_data['testemonial_author'];
+            $testemonial->testemonial_text = $form_data['testemonial_text'];
+            $testemonial->save();
+        }
+
+        return Redirect::to('admin/kritike')->with(['success' => 'Kritika je uspješno dodana']);
+    }
+
+    /**
+     * delete testemonial
+     * @return mixed
+     */
+    public function deleteTestemonial($id = null)
+    {
+        if($id == null){
+            return Redirect::to('admin/kritike')->withErrors('Kritika ne postoji');
+        }
+        else{
+            $testemonial = Testemonial::where('id', '=', $id)->first();
+            if(!$testemonial){
+                return Redirect::to('admin/kritike')->withErrors('Kritika ne postoji');
+            }
+            else{
+                $testemonial->delete();
+                return Redirect::to('admin/kritike')->with(['success' => 'Kritika je uspješno obrisana']);
+            }
+        }
+    }
+
+    /**
+     * show admin users
+     * @return mixed
+     */
+    public function showUsers()
+    {
+        $users_data = User::orderBy('id', 'DESC')->get();
+
+        return View::make('admin.users')->with(['page_title' => 'Administracija',
+                                                'users_data' => $users_data
+        ]);
+    }
+
+    /**
+     * show admin user edit
+     * @return mixed
+     */
+    public function showUpdateUser($id = null)
+    {
+        if($id == null){
+            return Redirect::to('admin/korisnici')->withErrors('Korisnik ne postoji');
+        }
+        else{
+            $user = User::where('id', '=', $id)->first();
+            if(!$user){
+                return Redirect::to('admin/korisnici')->withErrors('Korisnik ne postoji');
+            }
+            else{
+                return View::make('admin.users-edit')->with(['page_title' => 'Administracija',
+                                                        'user' => $user
+                ]);
+            }
+        }
+    }
+
+    /**
+     * update user
+     * @return mixed
+     */
+    public function updateUser()
+    {
+        $form_data = ['username' => e(Input::get('username')), 'password' => Input::get('password'), 'password_again' => Input::get('password_again'), 'email' => e(Input::get('email'))];
+        $token = Input::get('_token');
+        $user_id = e(Input::get('id'));
+
+        //check if csrf token is valid
+        if(Session::token() != $token){
+            return Redirect::back()->withErrors('Nevažeći CSRF token!');
+        }
+
+        $validator = Validator::make($form_data, User::$rulesLessStrict, User::$messages);
+        //check validation results and category if ok
+        if($validator->fails()){
+            return Redirect::back()->withErrors($validator->getMessageBag()->toArray())->withInput();
+        }
+        else{
+            $user = User::where('id', '=', $user_id)->first();
+            $user->username = $form_data['username'];
+            if(!empty($form_data['password']) && !empty($form_data['password'])){
+                $user->password = Hash::make($form_data['password']);
+            }
+            $user->email = $form_data['email'];
+            $user->save();
+        }
+
+        return Redirect::to('admin/korisnici')->with(['success' => 'Korisnik je uspješno izmjenjen']);
+    }
+
+    /**
+     * add user
+     * @return mixed
+     */
+    public function addUser()
+    {
+        $form_data = ['username' => e(Input::get('username')), 'password' => Input::get('password'), 'password_again' => Input::get('password_again'), 'email' => e(Input::get('email'))];
+        $token = Input::get('_token');
+
+        //check if csrf token is valid
+        if(Session::token() != $token){
+            return Redirect::back()->withErrors('Nevažeći CSRF token!');
+        }
+
+        $validator = Validator::make($form_data, User::$rules, User::$messages);
+        //check validation results and category if ok
+        if($validator->fails()){
+            return Redirect::back()->withErrors($validator->getMessageBag()->toArray())->withInput();
+        }
+        else{
+            $user = new User;
+            $user->username = $form_data['username'];
+            $user->password = Hash::make($form_data['password']);
+            $user->email = $form_data['email'];
+            $user->save();
+        }
+
+        return Redirect::to('admin/korisnici')->with(['success' => 'Korisnik je uspješno dodan']);
+    }
+
+    /**
+     * delete user
+     * @return mixed
+     */
+    public function deleteUser($id = null)
+    {
+        if($id == null){
+            return Redirect::to('admin/korisnici')->withErrors('Korisnik ne postoji');
+        }
+        else{
+            $user = User::where('id', '=', $id)->first();
+            if(!$user){
+                return Redirect::to('admin/korisnici')->withErrors('Korisnik ne postoji');
+            }
+            else{
+                $user->delete();
+                return Redirect::to('admin/korisnici')->with(['success' => 'Korisnik je uspješno obrisan']);
+            }
+        }
+    }
+
+    /**
      * show admin about us
      * @return mixed
      */
@@ -40,6 +222,7 @@ class AdminController extends BaseController {
         if($about_us_data == null){
             $about_us_data['post_body'] = 'Tekst stranice...(HR)';
             $about_us_data['post_body_eng'] = 'Tekst stranice...(ENG)';
+            $about_us_data['text_position'] = 'left';
             $about_us_data['image_file_name'] = null;
         }
 
@@ -54,7 +237,7 @@ class AdminController extends BaseController {
      */
     public function updateAboutUs()
     {
-        $form_data = ['post_body' => e(Input::get('post_body')), 'post_body_eng' => e(Input::get('post_body_eng')), 'image_file_name' => Input::file('about_us_image')];
+        $form_data = ['post_body' => e(Input::get('post_body')), 'post_body_eng' => e(Input::get('post_body_eng')), 'text_position' => e(Input::get('text_position')), 'image_file_name' => Input::file('about_us_image')];
         $token = Input::get('_token');
 
         //check if csrf token is valid
@@ -76,8 +259,10 @@ class AdminController extends BaseController {
             else{
                 $about_us = $check_data;
             }
+
             $about_us->post_body = $form_data['post_body'];
             $about_us->post_body_eng = $form_data['post_body_eng'];
+            $about_us->text_position = $form_data['text_position'];
 
             //check if there is image
             if($form_data['image_file_name'] == true){
@@ -106,66 +291,6 @@ class AdminController extends BaseController {
         }
 
         return Redirect::to('admin/o-nama')->with(['success' => 'Stranica je uspješno izmjenjena']);
-    }
-
-    /**
-     * update info database model
-     * @return mixed
-     */
-    public function updateHome()
-    {
-        $form_data = ['post_body' => e(Input::get('post_body')), 'post_body_eng' => e(Input::get('post_body_eng')), 'image_file_name' => Input::file('info_image')];
-        $token = Input::get('_token');
-
-        //check if csrf token is valid
-        if(Session::token() != $token){
-            return Redirect::back()->withErrors('Nevažeći CSRF token!');
-        }
-
-        $validator = Validator::make($form_data, Info::$rules, Info::$messages);
-        //check validation results and category if ok
-        if($validator->fails()){
-            return Redirect::back()->withErrors($validator->getMessageBag()->toArray())->withInput();
-        }
-        else{
-            //only one record in database
-            $check_data = Info::first();
-            if($check_data == null){
-                $info = new Info;
-            }
-            else{
-                $info = $check_data;
-            }
-            $info->post_body = $form_data['post_body'];
-            $info->post_body_eng = $form_data['post_body_eng'];
-
-            //check if there is image
-            if($form_data['image_file_name'] == true){
-                //check for image directory
-                $path = public_path().'/info_image/';
-                //delete existing image
-                File::deleteDirectory($path);
-
-                if(!File::exists($path)){
-                    //recreate directory
-                    File::makeDirectory($path, 0777);
-                }
-
-                $file_name = 'Nautica_info';
-                $file_extension = $form_data['image_file_name']->getClientOriginalExtension();
-                $full_name = $file_name.'.'.$file_extension;
-                $file_size = $form_data['image_file_name']->getSize();
-
-                $form_data['image_file_name']->move($path, $full_name);
-
-                $info->image_file_name = $full_name;
-                $info->image_file_size = $file_size;
-            }
-
-            $info->save();
-        }
-
-        return Redirect::to('admin/pocetna')->with(['success' => 'Stranica je uspješno izmjenjena']);
     }
 
     /**
@@ -198,33 +323,65 @@ class AdminController extends BaseController {
     }
 
     /**
-     * delete image from home section
+     * show admin video gallery
      * @return mixed
      */
-    public function deleteInfoImage()
+    public function showVideoGallery()
     {
-        $info = Info::first();
+        $video_gallery_data = VideoGallery::first();
 
-        $path = public_path().'/info_image/';
-
-        try {
-            // delete from hard disk
-            if (File::exists($path)) {
-                //delete existing image
-                File::deleteDirectory($path);
-            }
-
-            // update database
-            $info->image_file_name = '';
-            $info->image_file_size = '';
-            $info->save();
-
-            return Redirect::to('admin/pocetna')->with(['success' => 'Slika je uspješno obrisana']);
-        }
-        catch(Exception $e){
-            return Redirect::to('admin/pocetna')->withErrors('Slika nije mogla biti obrisana');
-        }
+        return View::make('admin.video-gallery')->with(['page_title' => 'Administracija',
+                                                'video_gallery_data' => $video_gallery_data
+        ]);
     }
+
+    /**
+     * add url to video gallery
+     * @return mixed
+     */
+    public function updateVideoGallery()
+    {
+        $form_data = ['video_url' => e(Input::get('video_url'))];
+        $token = Input::get('_token');
+
+        //check if csrf token is valid
+        if(Session::token() != $token){
+            return Redirect::back()->withErrors('Nevažeći CSRF token!');
+        }
+
+        $validator = Validator::make($form_data, VideoGallery::$rules, VideoGallery::$messages);
+        //check validation results and category if ok
+        if($validator->fails()){
+            return Redirect::back()->withErrors($validator->getMessageBag()->toArray())->withInput();
+        }
+        else{
+            //only one record in database
+            $check_data = VideoGallery::first();
+            if($check_data == null){
+                $video = new VideoGallery();
+            }
+            else{
+                $video = $check_data;
+            }
+            $video->video_url = $form_data['video_url'];
+            $video->save();
+        }
+
+        return Redirect::to('admin/video-galerija')->with(['success' => 'Stranica je uspješno izmjenjena']);
+    }
+
+    /**
+     * delete url from video gallery
+     * @return mixed
+     */
+    public function deleteVideoGalleryUrl()
+    {
+        $video_gallery = VideoGallery::first();
+        $video_gallery->delete();
+
+        return Redirect::to('admin/video-galerija')->with(['success' => 'Video je uspješno obrisan.']);
+    }
+
 
     /**
      * show admin gallery
@@ -270,6 +427,7 @@ class AdminController extends BaseController {
             if($gallery_images == true && $gallery_images[0] != null){
                 //check for image directory
                 $path = public_path().'/image_gallery_uploads/';
+                $short_path = 'image_gallery_uploads';
                 if(!File::exists($path)){
                     File::makeDirectory($path, 0777);
                 }
@@ -281,7 +439,9 @@ class AdminController extends BaseController {
                     $file_size = $img->getSize();
 
                     $file_uploaded = $img->move($path, $full_name);
-
+                    $image_resize = Image::make($path.$full_name)->widen(600, function ($constraint) {
+                                                                        $constraint->upsize();
+                                                                        })->save();
                     if($file_uploaded){
                         $image = new Gallery;
                         $image->file_name = $full_name;
@@ -333,7 +493,6 @@ class AdminController extends BaseController {
                 return Redirect::to('admin/galerija')->withErrors('odabrana slika ne postoji');
             }
         }
-
     }
 
 }

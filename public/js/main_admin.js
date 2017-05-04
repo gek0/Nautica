@@ -25,7 +25,14 @@ jQuery(document).ready(function(){
 });
 
 $(document).ready(function(){
-
+    $(function()
+    {
+        $("button#toggle-admin-video-help").click(function()
+        {
+            $(".admin-video-help").slideToggle();
+            return false;
+        });
+    });
 });
 
 /**

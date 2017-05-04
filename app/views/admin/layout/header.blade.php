@@ -29,7 +29,7 @@
     <link rel="canonical" href="{{ Request::url() }}" />
 
     <!-- scripts -->
-    {{ HTML::script('js/jquery.min.js', ['charset' => 'utf-8']) }}
+    {{ HTML::script('https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js', ['charset' => 'utf-8']) }}
     {{ HTML::script('js/bootstrap.min.js', ['charset' => 'utf-8']) }}
     {{ HTML::script('js/modernizr.js', ['charset' => 'utf-8']) }}
     {{ HTML::script('js/classie.min.js', ['charset' => 'utf-8']) }}
@@ -42,6 +42,7 @@
     <!-- stylesheets -->
     {{ HTML::style('css/bootstrap.min.css') }}
     {{ HTML::style('css/main.css') }}
+    {{ HTML::style('css/admin-main.css') }}
     {{ HTML::style('wysibb/theme/default/wbbtheme.css') }}
 </head>
 <body>
@@ -66,11 +67,13 @@
                 <nav class="navbar navbar-default">
                     <div class="container-fluid">
                         <ul class="nav navbar-nav">
-                            {{ HTML::smartRoute_link('/', 'Pregled stranice', '<i class="fa fa-search"></i>') }}
-                            {{ HTML::smartRoute_link('admin/pocetna', 'Početna', '<i class="fa fa-home"></i>') }}
-                            {{ HTML::smartRoute_link('admin/galerija', 'Galerija', '<i class="fa fa-camera"></i>') }}
-                            {{ HTML::smartRoute_link('admin/o-nama', 'O nama', '<i class="fa fa-info"></i>') }}
-                            {{ HTML::smartRoute_link('logout', 'Odjava', '<i class="fa fa-sign-out"></i>') }}
+                            {{ HTML::smartRoute_link('/', 'Pregled stranice', '<i class="fa fa-search" aria-hidden="true"></i>') }}
+                            {{ HTML::smartRoute_link('admin/kritike', 'Kritike', '<i class="fa fa-pencil" aria-hidden="true"></i>') }}
+                            {{ HTML::smartRoute_link('admin/video-galerija', 'Video galerija', '<i class="fa fa-video-camera" aria-hidden="true"></i>') }}
+                            {{ HTML::smartRoute_link('admin/galerija', 'Galerija', '<i class="fa fa-camera" aria-hidden="true"></i>') }}
+                            {{ HTML::smartRoute_link('admin/o-nama', 'O nama', '<i class="fa fa-info" aria-hidden="true"></i>') }}
+                            {{ HTML::smartRoute_link('admin/korisnici', 'Korisnici', '<i class="fa fa-users" aria-hidden="true"></i>') }}
+                            {{ HTML::smartRoute_link('logout', 'Odjava', '<i class="fa fa-sign-out" aria-hidden="true"></i>') }}
                         </ul>
                     </div>
                 </nav>

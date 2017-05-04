@@ -10,7 +10,7 @@
             <h2>{{{ $exception }}}</h2>
 
             <div class="space"></div>
-            <a href="{{ URL::route('home') }}"><button class="btn btn-submit btn-padded-smaller">Povratak na početnu <i class="fa fa-home fa-med"></i></button></a>
+            <a href="{{ URL::route('home') }}"><button class="learn-btn-inverse animated fadeInUp">Povratak na početnu <i class="fa fa-home fa-med"></i></button></a>
         </div>
     </section> <!-- end section-inner -->
 

@@ -6,7 +6,8 @@
 	"require": {
 		"laravel/framework": "4.2.*",
 		"golonka/bbcodeparser": "^2.2",
-	  	"anhskohbo/no-captcha": "1.*"
+	  	"anhskohbo/no-captcha": "1.*",
+		"intervention/image": "^2.3"
 	},
 	"autoload": {
 		"classmap": [

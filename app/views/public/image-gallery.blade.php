@@ -1,50 +1,37 @@
-@include('public.layout.header')
-
-    <section class="logo-placeholder">
-        <h1>{{ $page_title }}</h1>
-    </section>
-
-    <div class="row text-center">
-        <div class="col-lg-8 col-lg-offset-2">
-            @if($image_gallery_data->count() > 0)
-                <div id="grid-gallery" class="grid-gallery">
-                    <section class="grid-wrap">
-                        <ul class="grid">
-                            <li class="grid-sizer"></li><!-- for Masonry column width -->
-                            @foreach($image_gallery_data as $img)
-                                <li>
-                                    {{HTML::image('/image_gallery_uploads/'.$img->file_name, imageAlt($img->file_name), ['title' => imageAlt($img->file_name), 'class' => 'img-responsive img-thumbnail lazy'])}}
-                                </li>
-                            @endforeach
-                        </ul>
-                    </section><!-- // grid-wrap -->
-                    <section class="slideshow">
-                        <ul>
-                            @foreach($image_gallery_data as $img)
-                                <li>
-                                    {{HTML::image('/image_gallery_uploads/'.$img->file_name, imageAlt($img->file_name), ['title' => imageAlt($img->file_name), 'class' => 'img-responsive img-thumbnail'])}}
-                                </li>
-                            @endforeach
-                        </ul>
-                        <nav>
-                            <span class="icon nav-prev fa fa-chevron-le" title="Previous / Prethodna"></span>
-                            <span class="icon nav-next" title="Next / Sljedeća"></span>
-                            <span class="icon nav-close" title="Close / Zatvori"></span>
-                        </nav>
-                    </section><!-- // slideshow -->
-                </div><!-- // grid-gallery -->
-            @else
-                <h2><strong>Trenutno nema slika :(</strong></h2>
-                <h3>Svratite kasnije...</h3>
-            @endif
+<section class="gallery-intro">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Samo djelić što možete očekivati...</h1>
+                <p>Ponesite kući nezaboravne uspomene s Nautica Adventure.</p>
+                <p><a href="#gallery" class="arrow-btn">Pregledajte galeriju <i class="fa fa-long-arrow-right"></i></a></p>
+            </div>
         </div>
     </div>
-
-    <hr>
-    <div class="text-center">
-        <a href="{{ url('/') }}" title="Homepage">
-            <button class="btn btn-submit btn-padded"><i class="fa fa-home" aria-hidden="true"></i>  Nautica Adventure </button>
-        </a>
-    </div>
-
-@include('public.layout.footer')
+    <section class="gallery" id="gallery">
+        <div class="container-fluid">
+            <div class="row">
+                @if($image_gallery_data->count() > 0)
+                    <ul class="grid">
+                        @foreach($image_gallery_data as $img)
+                            <li>
+                                <figure>
+                                    {{HTML::image('/image_gallery_uploads/'.$img->file_name, imageAlt($img->file_name), ['title' => imageAlt($img->file_name), 'class' => 'img-responsive img-thumbnail lazy'])}}
+                                    <figcaption>
+                                        <div class="caption-content">
+                                            <a href="{{ url('/image_gallery_uploads/'.$img->file_name) }}" class="single_image lazy">
+                                                <i class="fa fa-search"></i>
+                                            </a>
+                                        </div>
+                                    </figcaption>
+                                </figure>
+                            </li>
+                        @endforeach
+                    </ul>
+                @else
+                    <h2 class="text-center"><strong>Trenutno nema slika, pobrinut ćemo se da nas vidite uskoro!</strong></h2>
+                @endif
+            </div>
+        </div>
+    </section>
+</section>
