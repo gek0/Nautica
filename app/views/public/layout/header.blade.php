@@ -80,7 +80,7 @@
         <div class="container">
             <div class="row nav-wrapper">
                 <div class="col-md-6 col-sm-6 col-xs-6 text-left">
-                    <a href="{{ url('/') }}">{{ HTML::image('css/assets/images/logo_main_nav.png', 'Nautica Adventure logo', ['title' => 'Nautica Adventure']) }}</a>
+                    <a href="{{ url('/') }}">{{ HTML::image('css/assets/images/logo_main_nav.png', 'Nautica Adventure logo', ['title' => 'Nautica Adventure', 'class' => 'img-responsive img-nav-logo']) }}</a>
                 </div>
                 <div class="col-md-5 col-sm-5 col-xs-5 text-right navicon">
                     <p>MENU</p><a id="trigger-overlay" class="nav_slide_button nav-toggle pulseAnim" href="#"><span></span></a>

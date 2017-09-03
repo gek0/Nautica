@@ -32,7 +32,7 @@
                         <i class="fa fa-ship" aria-hidden="true"></i>
                     </div>
                     <div class="about-us-content">
-                        <h4><strong>BLKUE CAVE, GREEN CAVE AND ISLAND OF VIS</strong></h4>
+                        <h4><strong>BLUE CAVE, GREEN CAVE AND ISLAND OF VIS</strong></h4>
                         <blockquote>ALL DAY EXCURSION<br>
                             <ul>
                                 <li>swimming in the Green Cave</li>
@@ -61,7 +61,7 @@
                         <i class="fa fa-glass" aria-hidden="true"></i>
                     </div>
                     <div class="about-us-content">
-                        <h4><strong>CRVENE STIJENE I DEGUSTACIJE VINA</strong></h4>
+                        <h4><strong>RED ROCKS AND WINE TASTING</strong></h4>
                         <blockquote>HALF DAY EXCURSION<br>
                             <ul>
                                 <li>small or private groups</li>
@@ -75,7 +75,7 @@
                     <p>drinks on board (water, beer, juice, ...)<br>
                         diving equipment<br>
                         fuel surcharge<br>
-                        discount in <a href="https://nautica-bar.com/" target="_blank">Nautica Bar</a></p>
+                        discount in <a href="https://nautica-bar.com/" class="special-snowflake' target="_blank">Nautica Bar</a></p>
                 </div>
             </div>
         </div>

@@ -75,7 +75,7 @@
                     <p>pića na brodu (voda, pivo, sok, ...)<br>
                         opremu za ronjenje<br>
                         nadoplatu za gorivo<br>
-                        popust u <a href="https://nautica-bar.com/" target="_blank">Nautica Bar</a></p>
+                        popust u <a href="https://nautica-bar.com/" class="special-snowflake' target="_blank">Nautica Bar</a></p>
                 </div>
             </div>
         </div>
